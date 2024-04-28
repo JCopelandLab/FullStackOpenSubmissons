@@ -1,0 +1,29 @@
+sequenceDiagram
+
+participant user
+participant webClient
+participant server
+
+user->>webClient: GET https://studies.cs.helsinki.fi/exampleapp/spa
+activate webClient
+webClient->>user: html
+deactivate webClient
+
+user->> webClient: Get https://studies.cs.helsinki.fi/exampleapp/main.css
+ activate webClient
+webClient->>user: css
+deactivate webClient
+
+user->>webClient: GET https://studies.cs.helsinki.fi/exampleapp/data.js
+activate webClient
+webClient->>user: js / js invokes json 
+deactivate webClient
+
+user-->webClient: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate webClient
+webClient->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+activate server
+server->>webClient: json data
+deactivate server
+webClient->>user: formats data
+deactivate webClient

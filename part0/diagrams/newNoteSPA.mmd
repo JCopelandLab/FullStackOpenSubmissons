@@ -1,0 +1,19 @@
+sequenceDiagram
+
+participant user
+participant webClient
+participant server
+
+user->>webClient: POST https://studie.cs.helsinki.fi/exampleapp/spa.js
+activate webClient
+webClient->>user: js / invokes json
+deactivate webClient
+
+user->>webClient: POST https://studie.cs.helsinki.fi/exampleapp/new_note_spa
+activate webClient
+webClient->>server: packages user data
+ activate server
+server->>webClient: data payload
+deactivate server
+webClient->>user: assembles data in css
+deactivate webClient

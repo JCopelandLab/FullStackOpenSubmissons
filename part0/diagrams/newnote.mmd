@@ -1,0 +1,36 @@
+sequenceDiagram
+
+participant user
+participant web client
+participant server
+
+user ->> web client: GET https://studies.cs.helsinki.fi/exampleapp/new_note/
+activate web client
+web client ->> user: sends HTML 
+deactivate web client
+
+user ->> web client: GET https://studies.cs.helsinki.fi/exampleapp/new_note/css
+activate web client
+web client ->> user: sends css
+deactivate web client
+
+user ->> web client: GET https://studies.cs.helsinki.fi/exampleapp/new_note/js
+activate web client
+web client ->> user: sends JS/activates JSON
+deactivate web client
+
+user ->> web client: GET https://studies.cs.helsinki.fi/exampleapp/new_note/json
+activate web client
+
+web client->> server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server->>web client: sends json
+
+web client ->> user: formats json data - {[key:value}
+deactivate web client
+
+user ->> web client: POST={[key:value]} https://studies.cs.helsinki.fi/exampleapp/json
+activate web client
+web client->>server: POST https://studies.cs.helsinki.fi/exampleapp/data.json
+server->> web client: data sent in json
+web client ->> user: sends data 
+deactivate web client
